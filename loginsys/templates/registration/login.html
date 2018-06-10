@@ -1,0 +1,32 @@
+{% extends 'mainpage/mainpage.html' %}
+
+{% block content %}
+<header class="bgimg-1 w3-display-container w3-grayscale-min" id="home">
+<div class="w3-display-center w3-text-white" style="padding:48px">
+{% comment %} <div class="w3-container w3-light-grey" style="padding:128px 16px" id="contact"> {% endcomment %}
+    <div align = "center">
+        <div class="w3-row-padding" style="margin-top:250px; width:50%">
+            <div>
+                {% if user.is_authenticated %}
+                    <center>
+                    <p >You have already logged in {{ user.username }}</p>
+                    </center>
+                {% endif %}
+                {% if not user.is_authenticated %}
+                    <center>
+                        <h3 class="w3-center">LOGIN</h3>
+                        <div class="w3-row-padding" style="margin-top:64px; width:50%">
+                            <form method="post">
+                                {% csrf_token %}
+                                {{ form.as_p }}
+                                <button type="submit" class="w3-button w3-white w3-padding-large w3-large w3-margin-top w3-opacity w3-hover-opacity-off">Login</button>
+                            </form>
+                        </div>
+                    </center>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+</header>
+{% endblock %}
