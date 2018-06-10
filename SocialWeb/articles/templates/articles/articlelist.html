@@ -1,0 +1,36 @@
+{% extends 'mainpage/mainpage.html'%}
+
+{% block content %}
+    {% if user.is_authenticated %}
+        {% if articles %}
+        <div style="padding:200px 300px 300px 300px">
+            {% for article in articles %}
+            
+                <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
+                    <img src="{{STATIC_URL}}image/user.jpg" alt="User" class="w3-left w3-circle w3-margin-right" style="width:60px"/>
+                    <span class="w3-right w3-opacity">{{article.date|date:"Y-m-d h:i:s"}}</span>
+                    <h3><a href="">{{article.author}}</a></h3><br>
+                    <hr class="w3-clear">
+                    <p style="padding : 0px 150px 20px 150px">{{article.body}}</p>
+                    {%if article.image%}
+                        <div class="w3-row-padding" style="margin:0 -16px">
+                            <div align = 'center'>
+                                <img src="{{article.image.url}}" style="width:auto" alt="Northern Lights" class="w3-margin-bottom">
+                            </div>  
+                        </div>
+                    {%endif%}
+                    <button type="button" class="w3-button w3-white w3-padding-large w3-large w3-margin-top w3-opacity w3-hover-opacity-off"><i class="fa fa-thumbs-up"></i>  Like</button> 
+                    <button type="button" class="w3-button w3-white w3-padding-large w3-large w3-margin-top w3-opacity w3-hover-opacity-off"><i class="fa fa-comment"></i>  Comment</button> 
+                </div>
+            {% endfor%}
+        </div>
+        {% else %}
+            
+            <h1>Article not found.</h1>
+            
+        {%endif%}
+
+    {% else %}
+        
+    {% endif %}
+{% endblock %}
