@@ -9,10 +9,12 @@
                     <form method="post" align = "center">
                         {% csrf_token %}
                         {% for field in form %}
-                            <p class="w3-input w3-border" align = "center" style="color:white">
-                            {{ field.label_tag }}<br>
-                            {{ field }}
-                            </p>
+                            <div class="w3-input w3-border" align = "center" style="color:white">
+                                <p>
+                                {{ field.label_tag }}<br>
+                                <p style="color:black">{{ field }}</p>
+                                </p>
+                            </div>
                             {% if field.help_text %}
                                 <small style="color:lightgrey" align = "center">{{ field.help_text|safe|linebreaks }}</small>
                             {% endif %}

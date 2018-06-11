@@ -15,3 +15,7 @@ class Article(models.Model):
         return self.title
     def snippet(self):
         return self.body[:30]+'[...]'
+    def authorcap(self):
+        capital = self.author
+        capital = str(capital).capitalize()
+        return capital

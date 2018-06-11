@@ -9,7 +9,7 @@
                 <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
                     <img src="{{STATIC_URL}}image/user.jpg" alt="User" class="w3-left w3-circle w3-margin-right" style="width:60px"/>
                     <span class="w3-right w3-opacity">{{article.date|date:"Y-m-d h:i:s"}}</span>
-                    <h3><a href="">{{article.author}}</a></h3><br>
+                    <h3><a href="">{{article.authorcap}}</a></h3><br>
                     <hr class="w3-clear">
                     <p style="padding : 0px 150px 20px 150px">{{article.body}}</p>
                     {%if article.image%}
