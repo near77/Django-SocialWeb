@@ -24,7 +24,7 @@ urlpatterns = [
     path('mainpage/', include('mainpage.urls')),
     path('login/', auth_views.login, name = 'login'),
     path('logout/', auth_views.logout, {'template_name':'mainpage/mainpage.html'}, name = 'logout'),
-    path('loginsys/', include('loginsys.urls')),
+    path('', include('loginsys.urls')),
     path('articles/', include('articles.urls'))]
 
 
