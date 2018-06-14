@@ -39,11 +39,10 @@
     }
 </style>
 
-<body>
+<body class="bgimg-1 w3-display-container" style = "height:100vh">
     <div class="w3-top">
         <div class="w3-bar w3-white w3-card" id="myNavbar">
             <a href="/mainpage/" class="w3-bar-item w3-button w3-wide"><i class="fa fa-home"></i>SocialWeb</a>
-            {% block titlebar%}
             <!-- Right-sided navbar links -->
             <div class="w3-right w3-hide-small">
                 {% if user.is_authenticated %}
@@ -53,9 +52,9 @@
                 <a href="/logout/" class="w3-bar-item w3-button"><span class="glyphicon glyphicon-log-in"></span>&nbsp;
                     Logout
                 </a>
-                <a href="/articles/article/add/" class="w3-bar-item w3-button"><span class="glyphicon glyphicon-plus"></span>&nbsp;
-                    AddArticle
-                </a>
+                {% block titlebar%}
+                
+                {% endblock %}
                 {% else %}
                 <a href="/login/" class="w3-bar-item w3-button"><span class="glyphicon glyphicon-log-out"></span>&nbsp;
                     LOGIN
@@ -65,17 +64,16 @@
                 </a>
                 {% endif %}
             </div>
-            {% endblock %}
             <a href="javascript:void(0)" class="w3-bar-item w3-button w3-right w3-hide-large w3-hide-medium" onclick="w3_open()">
             <i class="fa fa-bars"></i>
             </a>
         </div>
     </div>
     
-<header class="bgimg-1 w3-display-container w3-grayscale-min">
+
     {% block content %}
         {% if user.is_authenticated %}
-        <div class="w3-display-left w3-text-white " style="padding:48px">
+        <div class="w3-display-left w3-text-white w3-grayscale-min" style="padding:48px">
             <span class="w3-jumbo w3-hide-small">Try something other than Facebook</span><br>
             <span class="w3-xxlarge w3-hide-large w3-hide-medium"></span><br>
             <span class="w3-large">Start Now</span>
@@ -101,7 +99,5 @@
         </div> 
         {% endif %}
     {% endblock %}
-</header>   
-    
 </body>
 </html>

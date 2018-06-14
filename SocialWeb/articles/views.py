@@ -26,3 +26,31 @@ def ArticleCreate(request):
     else:
         form = ArticleForm()
         return render(request, 'articles/article_form.html', {'form':form})
+
+def ArticleDelete(request, pk):
+    if pk != None:
+        if request.method == "POST":
+            pk = request.POST['article_id']
+        try:
+            article = Article.objects.get(pk=pk)
+            article.delete()
+            return redirect('articles:list')
+        except:
+            message = "Error"
+    return render(request,"articles/articlelist.html")
+
+def ArticleLike(request, pk):
+    article = Article.objects.get(pk = pk)
+    next = request.GET.get('next', '/')
+    if request.user not in article.likes.all():
+        article.likes.add(request.user)
+        return redirect('../')
+    else:
+        article.likes.remove(request.user)
+        return redirect('../')
+    return render(request, "articles/article.html", {'article':article})
+
+def ArticleUpdate(UpdateView):
+    model = Article
+    fields = ['title','body','image']
+    

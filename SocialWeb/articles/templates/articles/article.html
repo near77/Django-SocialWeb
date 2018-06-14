@@ -1,10 +1,10 @@
 {% extends 'mainpage/mainpage.html'%}
 
 {% block content %}
-<div class="bgimg-2 w3-display-container" style = "width:100%; height:100vh">
+<div class=" bgimg-3 w3-display-container" style = "width:100%; height:100vh ">
     {% if user.is_authenticated %}
         {% if article %}
-        <div style="padding:100px 300px 300px 300px">
+        <div style="padding:100px 300px 0px 300px">
             <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
                 <img src="" alt="User" class="w3-left w3-circle w3-margin-right" style="width:60px"/>
                 <span class="w3-right w3-opacity">{{article.date|date:"Y-m-d h:i:s"}}</span>
@@ -18,14 +18,34 @@
                         </div>  
                     </div>
                 {%endif%}
-                <button type="button" class="w3-button w3-white w3-padding-large w3-large w3-margin-top w3-opacity w3-hover-opacity-off">
-                    <i class="fa fa-thumbs-up"></i>
-                    Likes: {{article.likes.count}}
-                </button> 
+                <form action="{% url 'articles:like' article.id %}" method = "GET">
+                    {% csrf_token %}
+                    <button type="submit" class="w3-button w3-white w3-padding-large w3-large w3-margin-top w3-opacity w3-hover-opacity-off">
+                        <i class="fa fa-thumbs-up"></i>
+                        Likes: {{article.likes.count}}
+                    </button>
+                </form> 
                 <button type="button" class="w3-button w3-white w3-padding-large w3-large w3-margin-top w3-opacity w3-hover-opacity-off">
                     <i class="fa fa-comment"></i>
                     Comment
-                </button> 
+                </button>
+                {% if user == article.author %} 
+                <form action="{% url 'articles:delete' article.id %}" method = "POST">
+                    {% csrf_token %}
+                    <input type="hidden" name = 'article_id' value = "{{article.id}}"/>
+                    <button type="submit" class="w3-button w3-white w3-padding-large w3-large w3-margin-top w3-opacity w3-hover-opacity-off">
+                        <i class="glyphicon glyphicon-trash"></i>
+                        Delete
+                    </button>
+                </form>
+                <form action="{% url 'articles:update' article.id %}" method = "GET">
+                    {% csrf_token %}
+                    <button type="submit" class="w3-button w3-white w3-padding-large w3-large w3-margin-top w3-opacity w3-hover-opacity-off">
+                        <i class="glyphicon glyphicon-edit"></i>
+                        Update
+                    </button>
+                </form>
+                {% endif %}
             </div>
         </div>
         {% else %}

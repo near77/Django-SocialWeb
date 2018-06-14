@@ -1,27 +1,37 @@
 {% extends 'mainpage/mainpage.html'%}
 
+{% block titlebar%}
+    <a href="/articles/article/add/" class="w3-bar-item w3-button"><span class="glyphicon glyphicon-plus"></span>&nbsp;
+        AddArticle
+    </a>
+{% endblock %}
 {% block content %}
+<div style = "background-color:rgba(0,0,0,0.6)" align = "center">
+    <p style = "padding :50px"></p>
     {% if user.is_authenticated %}
         {% if articles %}
-        <div style="padding:50px 300px 200px 300px">
+        <div style="width:65%">
             {% for article in articles %}
                 <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
                     <img src="" alt="User" class="w3-left w3-circle w3-margin-right" style="width:60px"/>
                     <span class="w3-right w3-opacity">{{article.date|date:"Y-m-d h:i:s"}}</span>
-                    <h4><a href="">{{article.authorcap}}</a></h4><br>
+                    <h4 align = "left"><a href="">{{article.authorcap}}</a></h4><br>
                     <hr class="w3-clear">
-                    <h3 style="padding : 0px 150px 20px 150px"><a href="/articles/{{article.id}}">{{article.snippet}}</a></h3>
+                    <h3 style="padding : 0px 150px 20px 150px" align = "left"><a href="/articles/{{article.id}}">{{article.snippet}}</a></h3>
                     {%if article.image%}
                         <div class="w3-row-padding" style="margin:0 -16px">
                             <div align = 'center'>
-                                <img src="{{article.image.url}}" style="width:700px ;height:480px" alt="ImageNotFound" class="w3-margin-bottom">
+                                <img src="{{article.image.url}}" style="max-width: 100%; width:auto ;height:auto" alt="ImageNotFound" class="w3-margin-bottom">
                             </div>  
                         </div>
                     {%endif%}
-                    <button type="button" class="w3-button w3-white w3-padding-large w3-large w3-margin-top w3-opacity w3-hover-opacity-off">
-                        <i class="fa fa-thumbs-up"></i>  
-                        Likes: {{article.likes.count}}
-                    </button> 
+                    <form action="{% url 'articles:like' article.id %}" method = "GET">
+                        {% csrf_token %}
+                        <button type="submit" class="w3-button w3-white w3-padding-large w3-large w3-margin-top w3-opacity w3-hover-opacity-off">
+                            <i class="fa fa-thumbs-up"></i>
+                            Likes: {{article.likes.count}}
+                        </button>
+                    </form> 
                 </div>
             {% endfor%}
         </div>
@@ -30,6 +40,9 @@
         {%endif%}
 
     {% else %}
-        
+        <div style = "background-color:rgba(0,0,0,0.6)">
+            <h1>You haven't logged in yet.</h1>
+        </div>
     {% endif %}
+</div>
 {% endblock %}
