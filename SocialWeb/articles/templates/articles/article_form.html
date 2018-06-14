@@ -6,7 +6,7 @@
         <div align = "center">
             <div class="w3-row-padding" style="margin-top:64px; width:50%">
                 <div>
-                    <form method="post" align = "center">
+                    <form method="POST" align = "center" enctype = "multipart/form-data" >
                         {% csrf_token %}
                         {% for field in form %}
                             <div>
@@ -25,7 +25,6 @@
                             </button>
                         </div>
                     </form>
-                    
                 </div>
             </div>
         </div>

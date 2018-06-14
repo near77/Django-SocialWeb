@@ -5,7 +5,7 @@
         {% if articles %}
         <div style="padding:50px 300px 200px 300px">
             {% for article in articles %}
-                <div class="w3-container w3-card w3-white w3-round w3-margin" ><br>
+                <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
                     <img src="" alt="User" class="w3-left w3-circle w3-margin-right" style="width:60px"/>
                     <span class="w3-right w3-opacity">{{article.date|date:"Y-m-d h:i:s"}}</span>
                     <h4><a href="">{{article.authorcap}}</a></h4><br>
@@ -14,7 +14,7 @@
                     {%if article.image%}
                         <div class="w3-row-padding" style="margin:0 -16px">
                             <div align = 'center'>
-                                <img src="{{article.image.url}}" style="width:700px ;height:480px" alt="Northern Lights" class="w3-margin-bottom">
+                                <img src="{{article.image.url}}" style="width:700px ;height:480px" alt="ImageNotFound" class="w3-margin-bottom">
                             </div>  
                         </div>
                     {%endif%}
