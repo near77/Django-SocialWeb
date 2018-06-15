@@ -1,24 +1,25 @@
 {% extends 'mainpage/mainpage.html'%}
 
 {% block content %}
-<div class=" bgimg-3 w3-display-container" style = "width:100%; height:100vh ">
+<div class=" bgimg-3 w3-display-container" style = "width:100% " align = "center">
+    <p style = "padding :25px"></p>
     {% if user.is_authenticated %}
         {% if article %}
-        <div style="padding:100px 300px 0px 300px">
+        <div style="width:65% ; height:90%">
             <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
                 <img src="" alt="User" class="w3-left w3-circle w3-margin-right" style="width:60px"/>
                 <span class="w3-right w3-opacity">{{article.date|date:"Y-m-d h:i:s"}}</span>
-                <h4><a href="">{{article.authorcap}}</a></h4><br>
+                <h4 align = "left"><a href="">{{article.authorcap}}</a></h4><br>
                 <hr class="w3-clear">
-                <h3 style="padding : 0px 150px 20px 150px">{{article.body}}</h3>
+                <h3 style="padding : 0px 50px 20px 50px" align = "left">{{article.body}}</h3>
                 {%if article.image%}
                     <div class="w3-row-padding" style="margin:0 -16px">
                         <div align = 'center'>
-                            <img src="{{article.image.url}}" style="width:700px ;height:480px" alt="ImageNotFound" class="w3-margin-bottom">
+                            <img src="{{article.image.url}}" style="max-width: 100%; width:auto ;height:auto" alt="ImageNotFound" class="w3-margin-bottom">
                         </div>  
                     </div>
                 {%endif%}
-                <form action="{% url 'articles:like' article.id %}" method = "GET">
+                <form action="{% url 'articles:like' article.id %}" method = "GET" style="display: inline;">
                     {% csrf_token %}
                     <button type="submit" class="w3-button w3-white w3-padding-large w3-large w3-margin-top w3-opacity w3-hover-opacity-off">
                         <i class="fa fa-thumbs-up"></i>
@@ -30,7 +31,7 @@
                     Comment
                 </button>
                 {% if user == article.author %} 
-                <form action="{% url 'articles:delete' article.id %}" method = "POST">
+                <form action="{% url 'articles:delete' article.id %}" method = "POST" style="display: inline;">
                     {% csrf_token %}
                     <input type="hidden" name = 'article_id' value = "{{article.id}}"/>
                     <button type="submit" class="w3-button w3-white w3-padding-large w3-large w3-margin-top w3-opacity w3-hover-opacity-off">
@@ -38,7 +39,7 @@
                         Delete
                     </button>
                 </form>
-                <form action="{% url 'articles:update' article.id %}" method = "GET">
+                <form action="{% url 'articles:update' article.id %}" method = "GET" style="display: inline;">
                     {% csrf_token %}
                     <button type="submit" class="w3-button w3-white w3-padding-large w3-large w3-margin-top w3-opacity w3-hover-opacity-off">
                         <i class="glyphicon glyphicon-edit"></i>

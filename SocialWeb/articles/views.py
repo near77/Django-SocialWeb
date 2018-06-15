@@ -50,7 +50,7 @@ def ArticleLike(request, pk):
         return redirect('../')
     return render(request, "articles/article.html", {'article':article})
 
-def ArticleUpdate(UpdateView):
+class ArticleUpdate(UpdateView):
     model = Article
     fields = ['title','body','image']
     

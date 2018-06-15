@@ -11,6 +11,8 @@ class Article(models.Model):
     likes = models.ManyToManyField(User,related_name='%(class)s_likes')
     image = models.FileField(null=True, blank=True, upload_to='./ArticleImage/')
     
+    def get_absolute_url(self):
+        return reverse('articles:detail',kwargs = {'pk':self.pk})
     def __str__(self):
         return self.title
     def snippet(self):
