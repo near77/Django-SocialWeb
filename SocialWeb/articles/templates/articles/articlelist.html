@@ -17,11 +17,11 @@
                     <span class="w3-right w3-opacity">{{article.date|date:"Y-m-d h:i:s"}}</span>
                     <h4 align = "left"><a href="">{{article.authorcap}}</a></h4><br>
                     <hr class="w3-clear">
-                    <h3 style="padding : 0px 150px 20px 150px" align = "left"><a href="/articles/{{article.id}}">{{article.snippet}}</a></h3>
+                    <h3 style="padding : 0px 50px 20px 50px" align = "left"><a href="/articles/{{article.id}}">{{article.snippet}}</a></h3>
                     {%if article.image%}
                         <div class="w3-row-padding" style="margin:0 -16px">
                             <div align = 'center'>
-                                <img src="{{article.image.url}}" style="max-width: 100%; width:auto ;height:auto" alt="ImageNotFound" class="w3-margin-bottom">
+                                <img src="{{article.image.url}}" style="max-width: 100%; width:100vh ;height:auto" alt="ImageNotFound" class="w3-margin-bottom">
                             </div>  
                         </div>
                     {%endif%}

@@ -8,4 +8,6 @@ urlpatterns = [ path('', views.article_list, name = 'list'),
                 path('article/add/', views.ArticleCreate, name = 'create'),
                 path('<int:pk>/delete/', views.ArticleDelete, name = 'delete'),
                 path('<int:pk>/like/', views.ArticleLike, name = 'like'),
-                path('<int:pk>/update/', views.ArticleUpdate.as_view(), name = 'update')]
+                path('<int:pk>/update/', views.ArticleUpdate.as_view(), name = 'update'),
+                path('<int:articleID>/commentCreate/', views.CommentCreate, name = 'commentCreate'),
+                path('commentDelete/<int:pk>/', views.CommentDelete, name = 'commentDelete')]

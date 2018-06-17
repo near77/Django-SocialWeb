@@ -1,7 +1,7 @@
 from django.views.generic.edit import UpdateView
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from .models import Article
+from .models import Article, Comment
 from .forms import ArticleForm
 from django.shortcuts import get_object_or_404
 # Create your views here.
@@ -12,7 +12,9 @@ def article_list(request):
 
 def article_detail(request, pk):
     article = Article.objects.get(pk = pk)
-    return render(request, "articles/article.html", {'article':article})
+    items = [article]
+    items.extend(list(Comment.objects.filter(article = article)))
+    return render(request, "articles/article.html", {'items':items})
 
 @login_required(login_url = '/login/')
 def ArticleCreate(request):
@@ -53,4 +55,26 @@ def ArticleLike(request, pk):
 class ArticleUpdate(UpdateView):
     model = Article
     fields = ['title','body','image']
-    
+
+def CommentCreate(request, articleID):
+    comment = request.POST.get('comment')
+    if comment:
+        comment = comment.strip()
+    if not comment:
+        return redirect('../')
+    article = get_object_or_404(Article, id = articleID)
+    Comment.objects.create(article = article, user=request.user, content =comment)
+    return redirect('../')
+
+def CommentDelete(request, pk):
+    if pk!=None:
+        if request.method == "POST":
+            pk = request.POST['article_id']
+        try:
+            comment = Comment.objects.get(pk = pk)
+            postId = comment.article_id
+            comment.delete()
+            return redirect('../../')
+        except:
+            message = "Reading Error"
+    return render(request, 'blog/blog.html')
