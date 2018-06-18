@@ -74,7 +74,7 @@ def CommentDelete(request, pk):
             comment = Comment.objects.get(pk = pk)
             postId = comment.article_id
             comment.delete()
-            return redirect('../../')
+            return redirect('http://127.0.0.1:8000/articles/'+str(postId)+'/')
         except:
             message = "Reading Error"
     return render(request, 'blog/blog.html')

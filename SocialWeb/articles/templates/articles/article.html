@@ -48,7 +48,10 @@
                     <form method = "POST" action="{% url 'articles:commentCreate' article.id %}">
                         {% csrf_token%}
                         <input type = "text" name = "comment" placeholder="comment ...">
-                        <input class = "btn" type = "submit" value = "comment">
+                        <button type="submit" class="w3-button w3-white w3-large w3-opacity w3-hover-opacity-off">
+                            <i class="glyphicon glyphicon-edit"></i>
+                            Comment
+                        </button>
                     </form>
                 {% else %}
                     <div style = "border-style: ridge;">
