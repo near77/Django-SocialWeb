@@ -25,7 +25,8 @@ urlpatterns = [
     path('login/', auth_views.login, name = 'login'),
     path('logout/', auth_views.logout, {'template_name':'mainpage/mainpage.html'}, name = 'logout'),
     path('', include('loginsys.urls')),
-    path('articles/', include('articles.urls'))]
+    path('articles/', include('articles.urls')),
+    path('profile/',include('userprofile.urls'))]
 
 
 if settings.DEBUG:

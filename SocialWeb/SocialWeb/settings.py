@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'mainpage',
     'loginsys',
     'articles',
+    'userprofile',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
