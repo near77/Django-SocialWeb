@@ -8,7 +8,10 @@ from .forms import ProfileForm
 # Create your views here.
 
 def personal_page(request, pk):
-    profile = Profile.objects.filter(author_id = pk)
+    try:
+        profile = Profile.objects.get(author_id = pk)
+    except:
+        profile = None
     items = [profile]
     items.extend(list(Article.objects.filter(author_id = pk).order_by('-date')))
     if items:
@@ -27,5 +30,9 @@ def ProfileCreate(request, pk):
             return render(request, 'userprofile/personalpage.html', {'pk':pk})
     else:
         form = ProfileForm()
-        return render(request, 'userprofile/profileform.html', {'form':form})
-    
+        return render(request, 'userprofile/personalpage.html', {'pk':pk})
+
+
+class ProfileUpdate(UpdateView):
+    model = Profile
+    fields = ['about_user','user_image','city','birthday']

@@ -6,40 +6,86 @@
     </a>
 {% endblock %}
 {% block content %}
-<div style = "background-color:rgba(0,0,0,0.6)" align = "center">
-    <p style = "padding :50px"></p>
-    {% if user.is_authenticated %}
-        {% if articles %}
-        <div style="width:65%">
-            {% for article in articles %}
-                <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
-                    <img src="" alt="User" class="w3-left w3-circle w3-margin-right" style="width:60px"/>
-                    <span class="w3-right w3-opacity">{{article.date|date:"Y-m-d h:i:s"}}</span>
-                    <h4 align = "left"><a href="/profile/{{article.author_id}}/">{{article.authorcap}}</a></h4><br>
-                    <hr class="w3-clear">
-                    <h3 style="padding : 0px 50px 20px 50px" align = "left"><a href="/articles/{{article.id}}">{{article.snippet}}</a></h3>
-                    {%if article.image%}
-                        <div class="w3-row-padding" style="margin:0 -16px">
-                            <div align = 'center'>
-                                <img src="{{article.image.url}}" style="max-width: 100%; width:100vh ;height:auto" alt="ImageNotFound" class="w3-margin-bottom">
-                            </div>  
+<div class=" bgimg-3 w3-container w3-content" style = "max-width:100%;" >
+    <p style = "padding :25px"></p>
+    <div class="w3-row">
+        {% if user.is_authenticated %}
+            {% if items %}
+                {% for item in items %}
+                    {% if forloop.first %}
+                    <nav class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:3;width:300px;" id="mySidebar"><br>
+                        <div class="w3-container">
+                            <a href="#" onclick="w3_close()" class="w3-hide-large w3-right w3-jumbo w3-padding w3-hover-grey" title="close menu">
+                            <i class="fa fa-remove"></i>
+                            </a>
+                            <img src="{{item.user_image.url}}" style="width:45%;" class="w3-round"><br><br>
+                            <h4><b><i class="fa fa-user fa-fw w3-margin-right w3-text-theme"></i>{{item.author}}</b></h4>
+                            <p class="w3-text-grey">User Profile</p>
+                            <p><i class="fa fa-pencil fa-fw w3-margin-right w3-text-theme"></i> {{item.about_user}}</p>
+                            <p><i class="fa fa-home fa-fw w3-margin-right w3-text-theme"></i> {{item.city}}</p>
+                            <p><i class="fa fa-birthday-cake fa-fw w3-margin-right w3-text-theme"></i> {{item.birthday}}</p>
+                            <p>
+                                <a href="/profile/{{user.id}}"><span class="glyphicon glyphicon-home"></span>&nbsp;
+                                    Home
+                                </a>
+                            </p>
                         </div>
-                    {%endif%}
-                    <p  class="w3-button w3-white w3-padding-large w3-large w3-margin-top w3-opacity w3-hover-opacity-off">
-                        <i class="fa fa-thumbs-up"></i>
-                        Likes: {{article.likes.count}}
-                    </p>
+                        {% if request.user == item.author %}
+                            <form action="{% url 'userprofile:update' item.id %}" method = "GET" style="display: inline;">
+                                {% csrf_token %}
+                                <button type="submit" class="w3-button w3-white">
+                                    <i class="glyphicon glyphicon-edit"></i>
+                                    Update
+                                </button>
+                            </form>
+                        {% endif %}
+                        <div class="w3-bar-block">
+                            <a href="#portfolio" onclick="w3_close()" class="w3-bar-item w3-button w3-padding w3-text-teal"><i class="fa fa-th-large fa-fw w3-margin-right"></i>PORTFOLIO</a> 
+                            <a href="#about" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-user fa-fw w3-margin-right"></i>ABOUT</a> 
+                            <a href="#contact" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-envelope fa-fw w3-margin-right"></i>CONTACT</a>
+                        </div>
+                        <div class="w3-panel w3-large">
+                            <i class="fa fa-facebook-official w3-hover-opacity"></i>
+                            <i class="fa fa-instagram w3-hover-opacity"></i>
+                            <i class="fa fa-snapchat w3-hover-opacity"></i>
+                            <i class="fa fa-pinterest-p w3-hover-opacity"></i>
+                            <i class="fa fa-twitter w3-hover-opacity"></i>
+                            <i class="fa fa-linkedin w3-hover-opacity"></i>
+                        </div>
+                    </nav>
+                    {% endif %}
+                    <div align = "center">
+                    {% if not forloop.first%}
+                    <div style="width:50%">
+                        <div class="w3-container w3-white w3-margin w3-card w3-round"><br>
+                            <img src="{{item.authorImg}}" alt="User" class="w3-left w3-circle w3-margin-right" style="width:60px;height:60px"/>
+                            <span class="w3-right w3-opacity">{{item.date|date:"Y-m-d h:i:s"}}</span>
+                            <h4 align = "left"><a href="/profile/{{item.author_id}}/">{{item.authorcap}}</a></h4><br>
+                            <hr class="w3-clear">
+                            <h3 style="padding : 0px 50px 20px 50px" align = "left"><a href="/articles/{{item.id}}">{{item.snippet}}</a></h3>
+                            {%if item.image%}
+                                <div class="w3-row-padding" style="margin:0 -16px">
+                                    <div align = 'center'>
+                                        <img src="{{item.image.url}}" style="max-width: 100%; width:100vh ;height:auto" alt="ImageNotFound" class="w3-margin-bottom">
+                                    </div>  
+                                </div>
+                            {%endif%}
+                            <p  class="w3-button w3-white w3-padding-large w3-large w3-margin-top w3-opacity w3-hover-opacity-off">
+                                <i class="fa fa-thumbs-up"></i>
+                                Likes: {{item.likes.count}}
+                            </p>
+                        </div>
+                    </div>
+                    {% endif %}
+                    </div>
+                {% endfor %}
+            {% else %}
+                <div>
+                    <h1>There is nothing</h1>
                 </div>
-            {% endfor%}
-        </div>
+            {% endif %}
         {% else %}
-            <h1>Article not found.</h1>
-        {%endif%}
-
-    {% else %}
-        <div style = "background-color:rgba(0,0,0,0.6)">
-            <h1>You haven't logged in yet.</h1>
-        </div>
-    {% endif %}
+        {% endif %}
+    </div>
 </div>
 {% endblock %}

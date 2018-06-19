@@ -46,11 +46,14 @@
             <!-- Right-sided navbar links -->
             <div class="w3-right w3-hide-small">
                 {% if user.is_authenticated %}
-                <a href="#team" class="w3-bar-item w3-button"><span class="glyphicon glyphicon-user"></span>&nbsp;
-                    {{ user.username }}
+                <a href="/profile/{{user.id}}" class="w3-bar-item w3-button"><span class="glyphicon glyphicon-home"></span>&nbsp;
+                    Home
                 </a>
                 <a href="/logout/" class="w3-bar-item w3-button"><span class="glyphicon glyphicon-log-in"></span>&nbsp;
                     Logout
+                </a>
+                <a href="/articles/" class="w3-bar-item w3-button"><span class="glyphicon glyphicon-list-alt"></span>&nbsp;
+                    Browse
                 </a>
                 {% block titlebar%}
                 

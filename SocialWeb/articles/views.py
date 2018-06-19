@@ -3,12 +3,23 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from .models import Article, Comment
 from .forms import ArticleForm
+from userprofile.models import Profile
 from django.shortcuts import get_object_or_404
 # Create your views here.
 
+# def article_list(request):
+#     articles = Article.objects.all().order_by('-date')
+#     return render(request, "articles/articlelist.html", {'articles':articles})
+
 def article_list(request):
     articles = Article.objects.all().order_by('-date')
-    return render(request, "articles/articlelist.html", {'articles':articles})
+    try:
+        profile = Profile.objects.get(author = request.user)
+    except:
+        profile = None
+    items = [profile]
+    items.extend(list(articles))
+    return render(request, 'articles/articlelist.html', {'items':items})
 
 def article_detail(request, pk):
     article = Article.objects.get(pk = pk)

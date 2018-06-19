@@ -8,11 +8,11 @@
         <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
             {% for article in items %}
                 {% if forloop.first %}
-                    <img src="" alt="User" class="w3-left w3-circle w3-margin-right" style="width:60px"/>
+                    <img src="{{article.authorImg}}" alt="User" class="w3-left w3-circle w3-margin-right" style="width:60px;height:60px"/>
                     <span class="w3-right w3-opacity">{{article.date|date:"Y-m-d h:i:s"}}</span>
-                    <h4 align = "left"><a href="">{{article.authorcap}}</a></h4><br>
+                    <h4 align = "left"><a href="/profile/{{article.author_id}}/">{{article.authorcap}}</a></h4><br>
                     <hr class="w3-clear">
-                    <h3 style="padding : 0px 50px 20px 50px" align = "left">{{article.body}}</h3>
+                    <h3 style="padding : 20px 50px 20px 50px;border-style: ridge;" align = "left">{{article.body}}</h3>
                     {%if article.image%}
                         <div class="w3-row-padding" style="margin:0 -16px">
                             <div align = 'center'>
@@ -65,8 +65,9 @@
                                 </button>
                             </form>
                             {% endif %}
-                            {{article.pubDateTime|date}} |
-                            <a href="" >{{article.user}}</a>: {{article.content}}
+                            <img src="{{article.authorImg}}" alt="User" class="w3-circle" style="width:50px;height:50px"/>
+                             |
+                            <a href="/profile/{{article.author_id}}/" >{{article.user}}</a>: {{article.content}} - {{article.pubDateTime|date}}
                         </h4>
                     </div>
                 {%endif%}
