@@ -1,7 +1,7 @@
 from django.contrib.auth import login, authenticate
 from django.shortcuts import render, redirect
 from .forms import SignUpForm
-
+from django.contrib.auth import login as auth_login
 
 def signup(request):
     if request.method == 'POST':
@@ -11,8 +11,8 @@ def signup(request):
             username = form.cleaned_data.get('username')
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=raw_password)
-            login(request, user)
-            return redirect('../../')
+            auth_login(request, user)
+            return redirect('../userprofile/profile/add/')
     else:
         form = SignUpForm()
     return render(request, 'registration/signup.html', {'form': form})

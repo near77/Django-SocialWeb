@@ -20,17 +20,17 @@ def personal_page(request, pk):
         return render(request, 'userprofile/personalpage.html',{'pk':pk})
 
 @login_required(login_url = '/login/')
-def ProfileCreate(request, pk):
+def ProfileCreate(request):
     if request.method == 'POST':
         form = ProfileForm(request.POST or None , request.FILES or None)
         if form.is_valid():
             instance = form.save(commit = False)
             instance.author = request.user
             instance.save()
-            return render(request, 'userprofile/personalpage.html', {'pk':pk})
+            return redirect('articles:list')
     else:
         form = ProfileForm()
-        return render(request, 'userprofile/personalpage.html', {'pk':pk})
+        return render(request, 'userprofile/profile_form.html', {'form':form})
 
 
 class ProfileUpdate(UpdateView):
