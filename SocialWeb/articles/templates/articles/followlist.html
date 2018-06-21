@@ -4,8 +4,8 @@
     <a href="/articles/article/add/" class="w3-bar-item w3-button"><span class="glyphicon glyphicon-pencil"></span>&nbsp;
         AddArticle
     </a>
-    <a href="/articles/follow/" class="w3-bar-item w3-button"><span class="glyphicon glyphicon-heart"></span>&nbsp;
-        Following
+    <a href="/articles/" class="w3-bar-item w3-button"><span class="glyphicon glyphicon-list-alt"></span>&nbsp;
+        Browse
     </a>
     <a href="/userprofile/{{user.id}}" class="w3-bar-item w3-button"><span class="glyphicon glyphicon-home"></span>&nbsp;
         Home
@@ -46,7 +46,7 @@
                             </form>
                         {% endif %}
                         <div class="w3-bar-block">
-                            <p class="w3-bar-item w3-button w3-padding"><i class="fa fa-user fa-fw w3-margin-right"></i>Following: {{item.follow.count}}</p> 
+                            <p class="w3-bar-item w3-button w3-padding"><i class="fa fa-user fa-fw w3-margin-right"></i>Following: {{item.follow.count}}</p>
                             <p class="w3-bar-item w3-button w3-padding"><i class="fa fa-user fa-fw w3-margin-right"></i>Followers: {{item.follower.count}}</p>
                             <a href="#contact" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-envelope fa-fw w3-margin-right"></i>CONTACT</a>
                         </div>

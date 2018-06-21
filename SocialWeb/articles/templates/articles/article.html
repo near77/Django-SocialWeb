@@ -1,7 +1,7 @@
 {% extends 'mainpage/mainpage.html'%}
 
 {% block content %}
-<div class=" bgimg-3 w3-display-container" style = "width:100% " align = "center">
+<div class=" bgimg-3 w3-display-container" style = "max-width:100%;min-height:100%" align = "center">
     <p style = "padding :25px"></p>
     {% if user.is_authenticated %}
     <div style="width:65% ; height:90%">
@@ -67,7 +67,7 @@
                             {% endif %}
                             <img src="{{article.authorImg}}" alt="User" class="w3-circle" style="width:50px;height:50px"/>
                              |
-                            <a href="/profile/{{article.author_id}}/" >{{article.user}}</a>: {{article.content}} - {{article.pubDateTime|date}}
+                            <a href="/userprofile/{{article.user.id}}/" >{{article.user}}</a>: {{article.content}} - {{article.pubDateTime|date}}
                         </h4>
                     </div>
                 {%endif%}

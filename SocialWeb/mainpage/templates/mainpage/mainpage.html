@@ -30,16 +30,12 @@
     }
     .bgimg-3 {
         background-position: center;
-        background-size: cover;
-        background-image: url("../../../static/mainpage/7.jpg");
-        min-height: 100%;
+        background-image: url("../../../static/mainpage/8.jpg");
+        background-size: 100% 100%;
     }
     .w3-bar .w3-button {
         padding: 16px;
     }
-    .active:active {
-        color: blue;
-      }
 </style>
 
 <body class="bgimg-1 w3-display-container" style = "height:100vh">
@@ -49,17 +45,21 @@
             <!-- Right-sided navbar links -->
             <div class="w3-right w3-hide-small">
                 {% if user.is_authenticated %}
-                <a href="/userprofile/{{user.id}}" class="w3-bar-item w3-button"><span class="glyphicon glyphicon-home"></span>&nbsp;
-                    Home
-                </a>
+                
                 <a href="/logout/" class="w3-bar-item w3-button"><span class="glyphicon glyphicon-log-in"></span>&nbsp;
                     Logout
                 </a>
+                
+                {% block titlebar%}
                 <a href="/articles/" class="w3-bar-item w3-button"><span class="glyphicon glyphicon-list-alt"></span>&nbsp;
                     Browse
                 </a>
-                {% block titlebar%}
-                
+                <a href="/articles/follow/" class="w3-bar-item w3-button"><span class="glyphicon glyphicon-heart"></span>&nbsp;
+                    Following
+                </a>
+                <a href="/userprofile/{{user.id}}" class="w3-bar-item w3-button"><span class="glyphicon glyphicon-home"></span>&nbsp;
+                    Home
+                </a>
                 {% endblock %}
                 {% else %}
                 <a href="/login/" class="w3-bar-item w3-button"><span class="glyphicon glyphicon-log-out"></span>&nbsp;

@@ -7,10 +7,6 @@ from userprofile.models import Profile
 from django.shortcuts import get_object_or_404
 # Create your views here.
 
-# def article_list(request):
-#     articles = Article.objects.all().order_by('-date')
-#     return render(request, "articles/articlelist.html", {'articles':articles})
-
 def article_list(request):
     articles = Article.objects.all().order_by('-date')
     try:
@@ -20,6 +16,23 @@ def article_list(request):
     items = [profile]
     items.extend(list(articles))
     return render(request, 'articles/articlelist.html', {'items':items})
+
+def follow_list(request):
+    try:
+        profile = Profile.objects.get(author = request.user)
+    except:
+        profile = None
+    items = [profile]
+    articles = None
+    for user in profile.follow.all():
+        if articles == None:
+            articles = Article.objects.filter(author = user)
+        else:
+            articles0 = Article.objects.filter(author = user)
+            articles = articles|articles0
+    articles = articles.order_by("-date")
+    items.extend(list(articles))    
+    return render(request, 'articles/followlist.html', {'items':items})
 
 def article_detail(request, pk):
     article = Article.objects.get(pk = pk)

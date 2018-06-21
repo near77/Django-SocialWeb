@@ -14,8 +14,14 @@ def personal_page(request, pk):
         profile = None
     items = [profile]
     items.extend(list(Article.objects.filter(author_id = pk).order_by('-date')))
+    followers = []
+    follows = []
+    for item in profile.follower.all():
+        followers.append(Profile.objects.get(author = item))
+    for item in profile.follow.all():
+        follows.append(Profile.objects.get(author = item))
     if items:
-        return render(request, 'userprofile/personalpage.html',{'items':items})
+        return render(request, 'userprofile/personalpage.html',{'items':items,'followers':followers,'follows':follows})
     else:
         return render(request, 'userprofile/personalpage.html',{'pk':pk})
 
@@ -55,4 +61,3 @@ def Follow(request, pk):
         profile2.follow.remove(profile.author)
         return redirect('../')
     return render(request, 'userprofile/personalpage.html',{'items':items})
-    
