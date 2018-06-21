@@ -25,7 +25,7 @@
                             <p><i class="fa fa-home fa-fw w3-margin-right w3-text-theme"></i> {{item.city}}</p>
                             <p><i class="fa fa-birthday-cake fa-fw w3-margin-right w3-text-theme"></i> {{item.birthday}}</p>
                             <p>
-                                <a href="/profile/{{user.id}}"><span class="glyphicon glyphicon-home"></span>&nbsp;
+                                <a href="/userprofile/{{user.id}}"><span class="glyphicon glyphicon-home"></span>&nbsp;
                                     Home
                                 </a>
                             </p>
@@ -60,7 +60,7 @@
                         <div class="w3-container w3-white w3-margin w3-card w3-round"><br>
                             <img src="{{item.authorImg}}" alt="User" class="w3-left w3-circle w3-margin-right" style="width:60px;height:60px"/>
                             <span class="w3-right w3-opacity">{{item.date|date:"Y-m-d h:i:s"}}</span>
-                            <h4 align = "left"><a href="/profile/{{item.author_id}}/">{{item.authorcap}}</a></h4><br>
+                            <h4 align = "left"><a href="/userprofile/{{item.author_id}}/">{{item.authorcap}}</a></h4><br>
                             <hr class="w3-clear">
                             <h3 style="padding : 0px 50px 20px 50px" align = "left"><a href="/articles/{{item.id}}">{{item.snippet}}</a></h3>
                             {%if item.image%}
@@ -70,10 +70,12 @@
                                     </div>  
                                 </div>
                             {%endif%}
-                            <p  class="w3-button w3-white w3-padding-large w3-large w3-margin-top w3-opacity w3-hover-opacity-off">
+                            <span class=" w3-white w3-padding-large w3-large w3-margin-top ">
                                 <i class="fa fa-thumbs-up"></i>
                                 Likes: {{item.likes.count}}
-                            </p>
+                            </span>   
+                            <br>
+                            <br> 
                         </div>
                     </div>
                     {% endif %}

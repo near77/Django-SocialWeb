@@ -43,9 +43,19 @@
                                 </button>
                             </form>
                         {% endif %}
+                        {% if request.user != item.author %}
+                            <form action="{% url 'userprofile:follow' item.author_id %}" method = "GET" style="display: inline;">
+                                {% csrf_token %}
+                                <button type="submit" class="w3-button w3-white w3-padding-large w3-large w3-margin-top" >
+                                    <i class="fa fa-thumbs-up"></i>
+                                    Follow
+                                </button>
+                            </form> 
+                        {% endif %}
+
                         <div class="w3-bar-block">
                             <a href="#portfolio" onclick="w3_close()" class="w3-bar-item w3-button w3-padding w3-text-teal"><i class="fa fa-th-large fa-fw w3-margin-right"></i>PORTFOLIO</a> 
-                            <a href="#about" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-user fa-fw w3-margin-right"></i>ABOUT</a> 
+                            <p class="w3-bar-item w3-button w3-padding"><i class="fa fa-user fa-fw w3-margin-right"></i>Followers: {{item.follower.count}}</p>
                             <a href="#contact" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-envelope fa-fw w3-margin-right"></i>CONTACT</a>
                         </div>
                         <div class="w3-panel w3-large">
@@ -75,10 +85,12 @@
                                     </div>  
                                 </div>
                             {%endif%}
-                            <p  class="w3-button w3-white w3-padding-large w3-large w3-margin-top w3-opacity w3-hover-opacity-off">
+                            <span class=" w3-white w3-padding-large w3-large w3-margin-top ">
                                 <i class="fa fa-thumbs-up"></i>
                                 Likes: {{item.likes.count}}
-                            </p>
+                            </span>   
+                            <br>
+                            <br> 
                         </div>
                     </div>
                     {% endif %}
@@ -93,4 +105,5 @@
         {% endif %}
     </div>
 </div>
+
 {% endblock %}

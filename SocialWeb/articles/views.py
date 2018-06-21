@@ -61,7 +61,7 @@ def ArticleLike(request, pk):
     else:
         article.likes.remove(request.user)
         return redirect('../')
-    return render(request, "articles/article.html", {'article':article})
+    return render(request, "articles/article.html", {'article':article}) 
 
 class ArticleUpdate(UpdateView):
     model = Article

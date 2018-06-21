@@ -36,3 +36,23 @@ def ProfileCreate(request):
 class ProfileUpdate(UpdateView):
     model = Profile
     fields = ['about_user','user_image','city','birthday']
+
+def Follow(request, pk):
+    try:
+        profile = Profile.objects.get(author_id = pk)
+    except:
+        profile = None
+    items = [profile]
+    items.extend(list(Article.objects.filter(author_id = pk).order_by('-date')))
+    next = request.GET.get('next', '/')
+    profile2 = Profile.objects.get(author_id = request.user.id)
+    if request.user not in profile.follower.all():
+        profile.follower.add(request.user)
+        profile2.follow.add(profile.author)
+        return redirect('../')
+    else:
+        profile.follower.remove(request.user)
+        profile2.follow.remove(profile.author)
+        return redirect('../')
+    return render(request, 'userprofile/personalpage.html',{'items':items})
+    
