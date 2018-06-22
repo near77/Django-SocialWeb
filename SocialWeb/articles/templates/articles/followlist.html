@@ -62,28 +62,38 @@
                     {% endif %}
                     <div align = "center">
                     {% if not forloop.first%}
-                    <div style="width:50%">
-                        <div class="w3-container w3-white w3-margin w3-card w3-round"><br>
-                            <img src="{{item.authorImg}}" alt="User" class="w3-left w3-circle w3-margin-right" style="width:60px;height:60px"/>
-                            <span class="w3-right w3-opacity">{{item.date|date:"Y-m-d h:i:s"}}</span>
-                            <h4 align = "left"><a href="/userprofile/{{item.author_id}}/">{{item.authorcap}}</a></h4><br>
-                            <hr class="w3-clear">
-                            <h3 style="padding : 0px 50px 20px 50px" align = "left"><a href="/articles/{{item.id}}">{{item.snippet}}</a></h3>
-                            {%if item.image%}
-                                <div class="w3-row-padding" style="margin:0 -16px">
-                                    <div align = 'center'>
-                                        <img src="{{item.image.url}}" style="max-width: 100%; width:100vh ;height:auto" alt="ImageNotFound" class="w3-margin-bottom">
-                                    </div>  
+                        {% if item %}
+                            <div style="width:50%">
+                                <div class="w3-container w3-white w3-margin w3-card w3-round"><br>
+                                    <img src="{{item.authorImg}}" alt="User" class="w3-left w3-circle w3-margin-right" style="width:60px;height:60px"/>
+                                    <span class="w3-right w3-opacity">{{item.date|date:"Y-m-d h:i:s"}}</span>
+                                    <h4 align = "left"><a href="/userprofile/{{item.author_id}}/">{{item.authorcap}}</a></h4><br>
+                                    <hr class="w3-clear">
+                                    <h3 style="padding : 0px 50px 20px 50px" align = "left"><a href="/articles/{{item.id}}">{{item.snippet}}</a></h3>
+                                    {%if item.image%}
+                                        <div class="w3-row-padding" style="margin:0 -16px">
+                                            <div align = 'center'>
+                                                <img src="{{item.image.url}}" style="max-width: 100%; width:100vh ;height:auto" alt="ImageNotFound" class="w3-margin-bottom">
+                                            </div>  
+                                        </div>
+                                    {%endif%}
+                                    <span class=" w3-white w3-padding-large w3-large w3-margin-top ">
+                                        <i class="fa fa-thumbs-up"></i>
+                                        Likes: {{item.likes.count}}
+                                    </span>   
+                                    <br>
+                                    <br> 
                                 </div>
-                            {%endif%}
-                            <span class=" w3-white w3-padding-large w3-large w3-margin-top ">
-                                <i class="fa fa-thumbs-up"></i>
-                                Likes: {{item.likes.count}}
-                            </span>   
-                            <br>
-                            <br> 
-                        </div>
-                    </div>
+                            </div>
+                        {% else %}
+                            <div style="width:50%">
+                                <div class="w3-container w3-white w3-margin w3-card w3-round"><br>
+                                    <h1>You haven't follow anyone yet.</h1> 
+                                    <br>
+                                    <br> 
+                                </div>
+                            </div>
+                        {% endif %}
                     {% endif %}
                     </div>
                 {% endfor %}

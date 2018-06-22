@@ -30,9 +30,12 @@ def follow_list(request):
         else:
             articles0 = Article.objects.filter(author = user)
             articles = articles|articles0
-    articles = articles.order_by("-date")
-    items.extend(list(articles))    
-    return render(request, 'articles/followlist.html', {'items':items})
+    if articles == None:
+        return render(request, 'articles/followlist.html', {'items':items})
+    else:
+        articles = articles.order_by("-date")
+        items.extend(list(articles))    
+        return render(request, 'articles/followlist.html', {'items':items})
 
 def article_detail(request, pk):
     article = Article.objects.get(pk = pk)
