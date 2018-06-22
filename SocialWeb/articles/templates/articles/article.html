@@ -10,7 +10,7 @@
                 {% if forloop.first %}
                     <img src="{{article.authorImg}}" alt="User" class="w3-left w3-circle w3-margin-right" style="width:60px;height:60px"/>
                     <span class="w3-right w3-opacity">{{article.date|date:"Y-m-d h:i:s"}}</span>
-                    <h4 align = "left"><a href="/profile/{{article.author_id}}/">{{article.authorcap}}</a></h4><br>
+                    <h4 align = "left"><a href="/userprofile/{{article.author_id}}/">{{article.authorcap}}</a></h4><br>
                     <hr class="w3-clear">
                     <h3 style="padding : 20px 50px 20px 50px;border-style: ridge;" align = "left">{{article.body}}</h3>
                     {%if article.image%}

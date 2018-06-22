@@ -30,11 +30,18 @@
                             <p><i class="fa fa-pencil fa-fw w3-margin-right w3-text-theme"></i> {{item.about_user}}</p>
                             <p><i class="fa fa-home fa-fw w3-margin-right w3-text-theme"></i> {{item.city}}</p>
                             <p><i class="fa fa-birthday-cake fa-fw w3-margin-right w3-text-theme"></i> {{item.birthday}}</p>
-                            <p>
-                                <a href="/userprofile/{{user.id}}"><span class="glyphicon glyphicon-home"></span>&nbsp;
-                                    Home
-                                </a>
-                            </p>
+                            <p><i class="fa fa-user fa-fw w3-margin-right"></i>Following: {{item.follow.count}}</p>
+                            <p><i class="fa fa-user fa-fw w3-margin-right"></i>Followers: {{item.follower.count}}</p>
+                            <p><i class="fa fa-envelope fa-fw w3-margin-right"></i>CONTACT</p>
+                        </div>
+
+                        <div class="w3-panel w3-large">
+                            <i class="fa fa-facebook-official w3-hover-opacity"></i>
+                            <i class="fa fa-instagram w3-hover-opacity"></i>
+                            <i class="fa fa-snapchat w3-hover-opacity"></i>
+                            <i class="fa fa-pinterest-p w3-hover-opacity"></i>
+                            <i class="fa fa-twitter w3-hover-opacity"></i>
+                            <i class="fa fa-linkedin w3-hover-opacity"></i>
                         </div>
                         {% if request.user == item.author %}
                             <form action="{% url 'userprofile:update' item.id %}" method = "GET" style="display: inline;">
@@ -45,19 +52,15 @@
                                 </button>
                             </form>
                         {% endif %}
-                        <div class="w3-bar-block">
-                            <p class="w3-bar-item w3-button w3-padding"><i class="fa fa-user fa-fw w3-margin-right"></i>Following: {{item.follow.count}}</p> 
-                            <p class="w3-bar-item w3-button w3-padding"><i class="fa fa-user fa-fw w3-margin-right"></i>Followers: {{item.follower.count}}</p>
-                            <a href="#contact" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-envelope fa-fw w3-margin-right"></i>CONTACT</a>
-                        </div>
-                        <div class="w3-panel w3-large">
-                            <i class="fa fa-facebook-official w3-hover-opacity"></i>
-                            <i class="fa fa-instagram w3-hover-opacity"></i>
-                            <i class="fa fa-snapchat w3-hover-opacity"></i>
-                            <i class="fa fa-pinterest-p w3-hover-opacity"></i>
-                            <i class="fa fa-twitter w3-hover-opacity"></i>
-                            <i class="fa fa-linkedin w3-hover-opacity"></i>
-                        </div>
+                        {% if request.user != item.author %}
+                            <form action="{% url 'userprofile:follow' item.author_id %}" method = "GET" style="display: inline;">
+                                {% csrf_token %}
+                                <button type="submit" class="w3-button w3-white w3-padding-large w3-large w3-margin-top" >
+                                    <i class="fa fa-thumbs-up"></i>
+                                    Follow
+                                </button>
+                            </form> 
+                        {% endif %}
                     </nav>
                     {% endif %}
                     <div align = "center">

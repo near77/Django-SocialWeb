@@ -5,7 +5,7 @@ from userprofile.models import Profile
 # Create your models here.
 class Article(models.Model):
     title = models.CharField(max_length = 140, default = 'Title')
-    body = models.TextField()
+    body = models.TextField(default = "")
     date = models.DateTimeField(auto_now_add=True)
     author = models.ForeignKey(User,default = None,on_delete = models.CASCADE,related_name='%(class)s_author')
     likes = models.ManyToManyField(User,related_name='%(class)s_likes')
