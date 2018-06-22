@@ -1,10 +1,10 @@
 from django.shortcuts import render
 from articles.models import Article
-from .models import Profile
+from .models import Profile, Album, Photo
 from django.shortcuts import render, redirect
 from django.views.generic.edit import UpdateView
 from django.contrib.auth.decorators import login_required
-from .forms import ProfileForm
+from .forms import ProfileForm, AlbumForm
 # Create your views here.
 
 def personal_page(request, pk):
@@ -61,3 +61,25 @@ def Follow(request, pk):
         profile2.follow.remove(profile.author)
         return redirect('../')
     return render(request, 'userprofile/personalpage.html',{'items':items})
+
+def album(request, pk):
+    profile = Profile.objects.get(author_id = pk)
+    items = [profile]
+    try:
+        albums = Album.objects.filter(author_id = pk)
+    except:
+        albums = None
+    return render(request, 'userprofile/album.html',{'items':items,'albums':albums})
+
+@login_required(login_url = '/login/')
+def AlbumCreate(request, pk):
+    if request.method == 'POST':
+        form = AlbumForm(request.POST , request.FILES)
+        if form.is_valid():
+            instance = form.save(commit = False)
+            instance.author = request.user
+            instance.save()
+            return redirect('../')
+    else:
+        form = AlbumForm()
+        return render(request, 'userprofile/album_form.html', {'form':form})

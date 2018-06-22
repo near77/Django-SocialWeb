@@ -1,33 +1,23 @@
 {% extends 'mainpage/mainpage.html' %}
-
 {% block titlebar%}
-    <a href="/articles/article/add/" class="w3-bar-item w3-button"><span class="glyphicon glyphicon-pencil"></span>&nbsp;
-        AddArticle
-    </a>
+    {% for item in items %}
+        {% if forloop.first %}
+            <a href="/userprofile/{{item.author_id}}/album/add/" class="w3-bar-item w3-button"><span class="glyphicon glyphicon-pencil"></span>&nbsp;
+                AddAlbum
+            </a>
+        {% endif %}
+    {% endfor %}
     <a href="/articles/" class="w3-bar-item w3-button"><span class="glyphicon glyphicon-list-alt"></span>&nbsp;
         Browse
     </a>
     <a href="/articles/follow/" class="w3-bar-item w3-button"><span class="glyphicon glyphicon-heart"></span>&nbsp;
         Following
     </a>
-    {% for item in items %}
-        {% if forloop.first %}
-            {% if request.user != item.author %}
-                <a href="/userprofile/{{user.id}}" class="w3-bar-item w3-button"><span class="glyphicon glyphicon-home"></span>&nbsp;
-                    Home
-                </a>
-            {% endif %}
-            <a href="/userprofile/{{item.author_id}}/album/" class="w3-bar-item w3-button"><span class="glyphicon glyphicon-book"></span>&nbsp;
-                Album
-            </a>
-        {% endif %}
-    {% endfor %}           
 {% endblock %}
-
 {% block content %}
 <div class=" bgimg-3 w3-container w3-content" style = "max-width:100%;min-height:100%" >
     <p style = "padding :25px"></p>
-    <div class="w3-row">
+    <div>
         {% if user.is_authenticated %}
             {% if items %}
                 {% for item in items %}
@@ -47,7 +37,6 @@
                             <p><i class="fa fa-user fa-fw w3-margin-right"></i>Followers: {{item.follower.count}}</p>
                             <p><i class="fa fa-envelope fa-fw w3-margin-right"></i>CONTACT</p>
                         </div>
-
                         <div class="w3-panel w3-large">
                             <i class="fa fa-facebook-official w3-hover-opacity"></i>
                             <i class="fa fa-instagram w3-hover-opacity"></i>
@@ -75,56 +64,28 @@
                             </form> 
                         {% endif %}
                     </nav>
-                    
-                    <div class="w3-sidebar w3-bar-block w3-collapse w3-animate-right" style="width:300px;right:0" id="mySidebar">
-                        <br>
-                        <div class="w3-dropdown-hover w3-hide-small">
-                            <button class="w3-padding-large w3-button">FOLLOWING : {{item.follow.count}} <i class="fa fa-caret-down"></i></button>     
-                            <div class="w3-dropdown-content w3-bar-block w3-card-4">
-                                {% for user in follows %}
-                                <a href="/userprofile/{{user.author_id}}" class="w3-bar-item w3-button"><i class="fa fa-user fa-fw w3-margin-right w3-text-theme"></i>{{user.author}}</a>
-                                {% endfor %}
-                            </div>
-                        </div>
-                        <br>
-                        <div class="w3-dropdown-hover w3-hide-small">
-                            <button class="w3-padding-large w3-button" >FOLLOWERS : {{item.follower.count}} <i class="fa fa-caret-down"></i></button>     
-                            <div class="w3-dropdown-content w3-bar-block w3-card-4">
-                                {% for user in followers %}
-                                <a href="/userprofile/{{user.author_id}}" class="w3-bar-item w3-button"><i class="fa fa-user fa-fw w3-margin-right w3-text-theme"></i>{{user.author}}</a>
-                                {% endfor %}
-                            </div>
-                        </div>
-                    </div>
-                    
                     {% endif %}
-                    <div align = "center">
-                    {% if forloop.first%}
-                    {% else %}
-                    <div style="width:50%">
-                        <div class="w3-container w3-white w3-margin w3-card w3-round"><br>
-                            <img src="{{item.authorImg}}" alt="User" class="w3-left w3-circle w3-margin-right" style="width:60px;height:60px"/>
-                            <span class="w3-right w3-opacity">{{item.date|date:"Y-m-d h:i:s"}}</span>
-                            <h4 align = "left">{{item.authorcap}}</h4><br>
-                            <hr class="w3-clear">
-                            <h3 style="padding : 0px 50px 20px 50px" align = "left"><a href="/articles/{{item.id}}">{{item.snippet}}</a></h3>
-                            {%if item.image%}
-                                <div class="w3-row-padding" style="margin:0 -16px">
-                                    <div align = 'center'>
-                                        <img src="{{item.image.url}}" style="max-width: 100%; width:100vh ;height:auto" alt="ImageNotFound" class="w3-margin-bottom">
-                                    </div>  
-                                </div>
-                            {%endif%}
-                            <span class=" w3-white w3-padding-large w3-large w3-margin-top ">
-                                <i class="fa fa-thumbs-up"></i>
-                                Likes: {{item.likes.count}}
-                            </span>   
-                            <br>
-                            <br> 
-                        </div>
-                    </div>
-                    {% endif %}
-                    </div>
+                    <center>
+                        <br>
+                        {% if albums %}
+                            <table style="width:50%">
+                                {% for item in albums %}
+                                    {% if forloop.counter|divisibleby:"6"%}
+                                        <tr class="w3-row-padding w3-white w3-card w3-round">
+                                        </tr>
+                                    {% else %}
+                                        <td class="w3-third w3-container w3-margin-bottom">
+                                            <img src="{{item.album_image.url}}" alt="Norway" style="width:100%" class="w3-hover-opacity">
+                                            <div class="w3-container w3-white">
+                                                <p><b>{{item.title}}</b></p>
+                                            </div>
+                                        </td>
+                                    {% endif %}
+                                {% endfor %}
+                            </table>
+                        {% endif %}
+                        </center>
+                    
                 {% endfor %}
             {% else %}
                 <div>
@@ -135,5 +96,4 @@
         {% endif %}
     </div>
 </div>
-
 {% endblock %}
