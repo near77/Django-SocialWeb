@@ -1,9 +1,15 @@
 {% extends 'mainpage/mainpage.html' %}
 
 {% block titlebar%}
-    <a href="/articles/article/add/" class="w3-bar-item w3-button"><span class="glyphicon glyphicon-pencil"></span>&nbsp;
-        AddArticle
-    </a>
+    {% for item in items %}
+        {% if forloop.first %}
+            {% if request.user == item.author %}
+                <a href="/articles/article/add/" class="w3-bar-item w3-button"><span class="glyphicon glyphicon-pencil"></span>&nbsp;
+                    AddArticle
+                </a>
+            {% endif %}
+        {% endif %}
+    {% endfor %}
     <a href="/articles/" class="w3-bar-item w3-button"><span class="glyphicon glyphicon-list-alt"></span>&nbsp;
         Browse
     </a>

@@ -1,0 +1,124 @@
+{% extends 'mainpage/mainpage.html' %}
+{% block titlebar%}
+    {% if request.user == item.author %}
+        <a href="/userprofile/album/{{album.id}}/add/" class="w3-bar-item w3-button"><span class="glyphicon glyphicon-pencil"></span>&nbsp;
+            AddPhoto
+        </a>
+    {% else %}
+        <a href="/userprofile/{{user.id}}" class="w3-bar-item w3-button"><span class="glyphicon glyphicon-home"></span>&nbsp;
+            Home
+        </a>
+    {% endif %}
+    <a href="/articles/" class="w3-bar-item w3-button"><span class="glyphicon glyphicon-list-alt"></span>&nbsp;
+        Browse
+    </a>
+    <a href="/articles/follow/" class="w3-bar-item w3-button"><span class="glyphicon glyphicon-heart"></span>&nbsp;
+        Following
+    </a>
+{% endblock %}
+{% block content %}
+<div class=" bgimg-3 w3-container w3-content" style = "max-width:100%;min-height:100%" >
+    <p style = "padding :25px"></p>
+    <div>
+        {% if user.is_authenticated %}
+            {% if item %}
+                <nav class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:3;width:300px;" id="mySidebar"><br>
+                    <div class="w3-container">
+                        <a href="#" onclick="w3_close()" class="w3-hide-large w3-right w3-jumbo w3-padding w3-hover-grey" title="close menu">
+                        <i class="fa fa-remove"></i>
+                        </a>
+                        <img src="{{item.user_image.url}}" style="width:45%;" class="w3-round"><br><br>
+                        <h4><b><i class="fa fa-user fa-fw w3-margin-right w3-text-theme"></i>{{item.author}}</b></h4>
+                        <p class="w3-text-grey">User Profile</p>
+                        <p><i class="fa fa-pencil fa-fw w3-margin-right w3-text-theme"></i> {{item.about_user}}</p>
+                        <p><i class="fa fa-home fa-fw w3-margin-right w3-text-theme"></i> {{item.city}}</p>
+                        <p><i class="fa fa-birthday-cake fa-fw w3-margin-right w3-text-theme"></i> {{item.birthday}}</p>
+                        <p><i class="fa fa-user fa-fw w3-margin-right"></i>Following: {{item.follow.count}}</p>
+                        <p><i class="fa fa-user fa-fw w3-margin-right"></i>Followers: {{item.follower.count}}</p>
+                        <p><i class="fa fa-envelope fa-fw w3-margin-right"></i>CONTACT</p>
+                    </div>
+                    <div class="w3-panel w3-large">
+                        <i class="fa fa-facebook-official w3-hover-opacity"></i>
+                        <i class="fa fa-instagram w3-hover-opacity"></i>
+                        <i class="fa fa-snapchat w3-hover-opacity"></i>
+                        <i class="fa fa-pinterest-p w3-hover-opacity"></i>
+                        <i class="fa fa-twitter w3-hover-opacity"></i>
+                        <i class="fa fa-linkedin w3-hover-opacity"></i>
+                    </div>
+                    {% if request.user == item.author %}
+                        <form action="{% url 'userprofile:update' item.id %}" method = "GET" style="display: inline;">
+                            {% csrf_token %}
+                            <button type="submit" class="w3-button w3-white">
+                                <i class="glyphicon glyphicon-edit"></i>
+                                Update
+                            </button>
+                        </form>
+                    {% endif %}
+                    {% if request.user != item.author %}
+                        <form action="{% url 'userprofile:follow' item.author_id %}" method = "GET" style="display: inline;">
+                            {% csrf_token %}
+                            <button type="submit" class="w3-button w3-white w3-padding-large w3-large w3-margin-top" >
+                                <i class="fa fa-thumbs-up"></i>
+                                Follow
+                            </button>
+                        </form> 
+                    {% endif %}
+                </nav>
+            {% endif %}
+            <div style="margin-left:300px">
+                <br>
+                {% if photo %}
+                    {% for item in photo %}
+                        {% if forloop.counter|divisibleby:"6" %}
+                            <div class="w3-row-padding">
+                            </div>
+                            <div class="w3-third w3-container w3-margin-bottom" style="width:300px">
+                                <div class="w3-dropdown-hover w3-hide-small">
+                                    <img src="{{item.image.url}}" alt="Norway" style="width:100%; height:300px" class="w3-hover-opacity">
+                                    <div class="w3-dropdown-content w3-bar-block w3-card-4">
+                                        <img src="{{item.image.url}}" alt="Norway" style="width:800px; height:600px" class="w3-hover-opacity">
+                                    </div>
+                                </div>
+                                <div class="w3-container w3-white">
+                                {% if request.user == item.author %}
+                                    <form action="{% url 'userprofile:photodelete' item.id %}" method = "POST" style="display: inline;">
+                                        {% csrf_token %}
+                                        <input type="hidden" name = 'item_id' value = "{{item.id}}"/>
+                                        <button type="submit" class="w3-button w3-white">
+                                            <i class="glyphicon glyphicon-trash"></i>
+                                            Delete
+                                        </button>
+                                    </form>
+                                {% endif %}
+                                </div>
+                            </div>
+                        {% else %}
+                            <div class="w3-third w3-container w3-margin-bottom" style="width:300px">
+                                <div class="w3-dropdown-hover w3-hide-small">
+                                    <img src="{{item.image.url}}" alt="Norway" style="width:100%; height:300px" class="w3-hover-opacity">
+                                    <div class="w3-dropdown-content w3-bar-block w3-card-4">
+                                        <img src="{{item.image.url}}" alt="Norway" style="width:800px; height:600px" class="w3-hover-opacity">
+                                    </div>
+                                </div>
+                                <div class="w3-container w3-white">
+                                    {% if request.user == item.author %}
+                                    <form action="{% url 'userprofile:photodelete' item.id %}" method = "POST" style="display: inline;">
+                                        {% csrf_token %}
+                                        <input type="hidden" name = 'item_id' value = "{{item.id}}"/>
+                                        <button type="submit" class="w3-button w3-white">
+                                            <i class="glyphicon glyphicon-trash"></i>
+                                            Delete
+                                        </button>
+                                    </form>
+                                {% endif %}
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+            </div>
+        {% else %}
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

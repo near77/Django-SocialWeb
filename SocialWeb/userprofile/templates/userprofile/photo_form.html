@@ -1,0 +1,35 @@
+{% extends 'mainpage/mainpage.html'%}
+
+{% block content %}
+<div class="bgimg-4 w3-container w3-content " id="home" style = "max-width:100%; min-height:100%">
+    <div style="padding:64px 16px ; background:rgba(0,0,0,0.5)" id="contact">
+        <br>
+        <br>
+        <div align = "center">
+            <div class="w3-row-padding" style="margin-top:64px; width:50%">
+                <div>
+                    <form method="POST" align = "center" enctype = "multipart/form-data" >
+                        {% csrf_token %}
+                        {% for field in form %}
+                            <div>
+                                <span class = 'text-danger small'>{{field.errors}}</span>
+                            </div>
+                            <div class="w3-input w3-border form-group" align = "center" style="color:white">
+                                <label>{{ field.label_tag }}</label><br>
+                                <div>{{ field }}</div>
+                            </div>
+                        {% endfor %}
+                        <br>
+                        <div class = 'form-group'>
+                            <button class="w3-button w3-black" type="submit">
+                                <i class="fa fa-paper-plane"></i>
+                                SUBMIT
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
