@@ -43,7 +43,7 @@
                             <a href="#" onclick="w3_close()" class="w3-hide-large w3-right w3-jumbo w3-padding w3-hover-grey" title="close menu">
                             <i class="fa fa-remove"></i>
                             </a>
-                            <img src="{{item.user_image.url}}" style="width:45%;" class="w3-round"><br><br>
+                            <img src="{{item.user_image.url}}" style="width:60%;" class="w3-round"><br><br>
                             <h4><b><i class="fa fa-user fa-fw w3-margin-right w3-text-theme"></i>{{item.author}}</b></h4>
                             <p class="w3-text-grey">User Profile</p>
                             <p><i class="fa fa-pencil fa-fw w3-margin-right w3-text-theme"></i> {{item.about_user}}</p>
@@ -117,7 +117,7 @@
                             {%if item.image%}
                                 <div class="w3-row-padding" style="margin:0 -16px">
                                     <div align = 'center'>
-                                        <img src="{{item.image.url}}" style="max-width: 100%; width:100vh ;height:auto" alt="ImageNotFound" class="w3-margin-bottom">
+                                        <img src="{{item.image.url}}" style="max-width: 100%; width:auto ;max-height:600px;height:auto" alt="ImageNotFound" class="w3-margin-bottom">
                                     </div>  
                                 </div>
                             {%endif%}
@@ -140,6 +140,7 @@
         {% else %}
         {% endif %}
     </div>
+    <p style = "padding :300px"></p>
 </div>
 
 {% endblock %}
