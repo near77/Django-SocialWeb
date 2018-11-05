@@ -32,6 +32,7 @@ Demo
 -   Photo
 <img style="vertical-align:middle;" width="600" height="400" src="https://github.com/near77/SocialWeb/blob/master/Photo0.PNG"/>
 -   Photo
+
 Requirement
 ---
 -   Django
