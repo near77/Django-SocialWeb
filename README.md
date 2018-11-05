@@ -10,17 +10,28 @@ Function
 
 Demo
 ---
-<img style="vertical-align:middle;" width="600" height="360" src="https://github.com/near77/SocialWeb/blob/master/W1.PNG"/>
--   Main page - browsing all users' articles.
-<img style="vertical-align:middle;" width="600" height="360" src="https://github.com/near77/SocialWeb/blob/master/W2.PNG"/>
--   Main page - browsing all users' articles.
-<img style="vertical-align:middle;" width="500" height="360" src="https://github.com/near77/SocialWeb/blob/master/W4.PNG"/>
--   Article body
-<img style="vertical-align:middle;" width="600" height="300" src="https://github.com/near77/SocialWeb/blob/master/W6.PNG"/>
--   Album List
-<img style="vertical-align:middle;" width="600" height="300" src="https://github.com/near77/SocialWeb/blob/master/W7.PNG"/>
+<img style="vertical-align:middle;" width="600" height="400" src="https://github.com/near77/SocialWeb/blob/master/Mainpage.PNG"/>
+-   Mainpage
+<img style="vertical-align:middle;" width="600" height="400" src="https://github.com/near77/SocialWeb/blob/master/SignUp.PNG"/>
+-   Signup
+<img style="vertical-align:middle;" width="600" height="400" src="https://github.com/near77/SocialWeb/blob/master/Login.PNG"/>
+-   Login
+<img style="vertical-align:middle;" width="600" height="400" src="https://github.com/near77/SocialWeb/blob/master/UpdateProfile.PNG"/>
+-   Setup Profile
+<img style="vertical-align:middle;" width="600" height="400" src="https://github.com/near77/SocialWeb/blob/master/Browse.PNG"/>
+-   Browse
+<img style="vertical-align:middle;" width="600" height="400" src="https://github.com/near77/SocialWeb/blob/master/UserProfile.PNG"/>
+-   Personal Page
+<img style="vertical-align:middle;" width="600" height="400" src="https://github.com/near77/SocialWeb/blob/master/Article.PNG"/>
+-   Article
+<img style="vertical-align:middle;" width="600" height="400" src="https://github.com/near77/SocialWeb/blob/master/Comment.PNG"/>
+-   Comment
+<img style="vertical-align:middle;" width="600" height="400" src="https://github.com/near77/SocialWeb/blob/master/Album.PNG"/>
 -   Album
-
+<img style="vertical-align:middle;" width="600" height="400" src="https://github.com/near77/SocialWeb/blob/master/Photo.PNG"/>
+-   Photo
+<img style="vertical-align:middle;" width="600" height="400" src="https://github.com/near77/SocialWeb/blob/master/Photo0.PNG"/>
+-   Photo
 Requirement
 ---
 -   Django
