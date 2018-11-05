@@ -5,7 +5,7 @@ Function
 ---
 -   User can create account.
 -   User can create their profile.
--   User can post articles, upload photos, add other users as friends.
+-   User can post articles, upload photos, follow other users.
 -   User can Like or comment on other's articles.
 
 Demo
